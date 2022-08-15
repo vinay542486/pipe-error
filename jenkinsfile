@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git branch: 'main', url: 'https://github.com/vinay542486/testrepo.git'
+                git 'https://github.com/vinay542486/javarepo.git'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh '''
                         #!/bin/bash 
