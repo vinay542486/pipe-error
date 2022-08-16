@@ -13,7 +13,10 @@ pipeline {
             }
         }
  script {
- if($? == 0) {
+sh '''
+if($? == 0)
+''' 
+{
         stage('DEPLOY') {
             steps {
                 echo "This is a DEPLOY stage"
