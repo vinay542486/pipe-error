@@ -1,34 +1,33 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Build') { 
             steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh '''
                         #!/bin/bash 
                         pwd 
                         ls
                         echo "This is a BUILD stage"
                         sleep 5
-                        '''    
+                        exit 1
+                    ''' 
+                }     
             }
         }
-sh '''
-if($? == 0)
-''' 
-{
+
         stage('DEPLOY') {
             steps {
                 echo "This is a DEPLOY stage"
                 sh 'sleep 5'
             }
         }
-        else {
+    
         stage('testing') {
             steps {
                 echo "this is testing stage"
                 }
                 }
-         }
          }
    }
 }
