@@ -14,11 +14,11 @@ pipeline {
                         ls
                         echo "This is a BUILD stage"
                         sleep 5
-                    '''
                     if[$? == 0] ;then
                     echo "param.stage == deploy"
                     else 
                     echo "param.stage == testing"
+                    '''
                 }     
             }
         }
