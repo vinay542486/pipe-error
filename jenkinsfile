@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    parameters {
-  choice(name: 'stage', choices: ['build','deploy','testing'], description: 'stages to build')
-}
     stages {
         stage('Build') {
             steps {
@@ -14,21 +11,19 @@ pipeline {
                         ls
                         echo "This is a BUILD stage"
                         sleep 5
-                    if[$? == 0] ;then
-                    echo "param.stage == deploy"
-                    else 
-                    echo "param.stage == testing"
-                    '''
                 }     
             }
         }
-
+ script {
+ if[$? == 0] 
         stage('DEPLOY') {
             steps {
                 echo "This is a DEPLOY stage"
                 sh 'sleep 5'
             }
         }
+        }
+        else 
         stage('testing') {
             steps {
                 echo "this is testing stage"
